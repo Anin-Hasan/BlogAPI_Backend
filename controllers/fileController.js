@@ -1,10 +1,30 @@
 const { PrismaClient } = require("@prisma/client");
-const { Post } = require("../utils/prisma");
+const { Post, User } = require("../utils/prisma");
 
 const prisma = new PrismaClient();
 
-exports.getPosts = (req, res) => {
-  res.render("postslist");
+exports.getHome = async (req, res) => {
+  try {
+    const posts = await Post.findMany({
+      include: {
+        user: true, // Include user information
+      },
+    });
+    res.render("home", { posts });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.getPosts = async (req, res) => {
+  const userId = req.user.id;
+  const user = req.user;
+  try {
+    const posts = await Post.findMany({ where: { userId } });
+    res.render("postslist", { posts, user });
+  } catch (error) {
+    console.log("error fetching posts");
+  }
 };
 
 exports.createPostGet = (req, res) => {

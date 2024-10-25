@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Post List</title>
+    <title>Home</title>
     <style>
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -68,8 +68,7 @@
   <body>
     <div class="post-list-container">
       <div class="header">
-        <h1>Post List</h1>
-        <span class="username"><%= user.username %></span>
+        <h1>Home</h1>
       </div>
       <% posts.forEach(post => { %>
       <div class="post">
@@ -78,11 +77,12 @@
         </a>
         <p><%= post.des %></p>
         <div class="meta">
-          Created at: <%= new Date(post.createdAt).toLocaleString() %> | Updated
-          at: <%= new Date(post.updatedAt).toLocaleString() %>
+          By: <%= post.user.username %> | Updated at: <%= new
+          Date(post.updatedAt).toLocaleString() %>
         </div>
       </div>
       <% }) %>
     </div>
+    <a href="/logout" class="logout">Logout</a>
   </body>
 </html>

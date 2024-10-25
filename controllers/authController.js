@@ -55,3 +55,7 @@ exports.postLogin = async (req, res) => {
     console.log(error);
   }
 };
+exports.logout = (req, res, next) => {
+  res.clearCookie("token");
+  res.redirect("/login");
+};

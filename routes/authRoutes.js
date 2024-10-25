@@ -9,14 +9,6 @@ router.get("/login", authController.getLogin);
 router.get("/register", authController.getRegister);
 router.post("/register", authController.postRegister);
 router.post("/login", authController.postLogin);
-
-//need to improve later.
-router.get(
-  "/protected",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.render("createpost");
-  }
-);
+router.get("/logout", authController.logout);
 
 module.exports = router;
