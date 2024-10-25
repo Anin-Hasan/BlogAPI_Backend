@@ -44,6 +44,7 @@ exports.postLogin = async (req, res) => {
       id: user.id,
     };
     const token = jwt.sign(payload, "random-string", { expiresIn: "1d" });
+    res.cookie("token", token, { httpOnly: true });
     // console.log("logged in nicely", token);
     return res.status(200).send({
       success: true,
